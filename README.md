@@ -1,1 +1,1 @@
-# OwnRepo
+# Interview Preparation Repo
