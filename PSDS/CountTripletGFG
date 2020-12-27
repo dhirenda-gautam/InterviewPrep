@@ -1,0 +1,21 @@
+class Solution {
+//Function implementation only
+    int countTriplet(int arr[], int n) {
+        int triplet = 0;
+        Set<Integer> freq = new HashSet<Integer>();
+        
+        for(int number : arr){
+            freq.add(number);
+        }
+        
+        for(int i =0;i<n;i++){
+            for(int j= i+1;j< n;j++){
+                int sum = arr[i] + arr[j];
+                if(freq.contains(sum)){
+                    triplet++;
+                }
+            }
+        }
+        return triplet;
+    }
+}
