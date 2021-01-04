@@ -1,0 +1,56 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Main {
+    public static void main(String args[] ) throws Exception {
+        String inputData = "";
+        String thisLine = null;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        while ((thisLine = br.readLine()) != null) {
+            inputData += thisLine + "\n";
+        }
+        // Output the solution to the console
+        System.out.println(codeHere(inputData));
+    }
+    /* This Function will print the Permutation of the Provided String
+     * We are using recusrion to solve the problem**/
+    public static String codeHere(String inputData) {
+        TreeSet<String> setOfPermute = new TreeSet<>();
+        // Use this function to write your solution;
+        String split[] = inputData.split("\n");
+
+        int length = Integer.parseInt(split[0]);
+        for(int i =1; i <=length;i++){
+           inputData =  calculatePermute(split[i].toLowerCase(), "", setOfPermute);
+           for(String s: setOfPermute)
+             System.out.print(s);
+           setOfPermute = new TreeSet<>();
+           System.out.println();
+        }
+        return inputData;
+    }
+
+    public static String calculatePermute(String input, String permute,TreeSet<String> setOfPermute){
+        int lengthOfString = input.length();
+        if(lengthOfString == 0){
+            setOfPermute.add(permute.toUpperCase()+ " ");
+        }
+    
+    //Boolean Array of character to store the Value true/false to remove duplicates.
+    boolean alphabet[] = new boolean[26];
+        for(int i =0; i < lengthOfString;i++){
+          char ch = input.charAt(i);
+          //Exclude the Char to get Rest of String
+          String restOfString = input.substring(0,i)+input.substring(i+1);
+          //Assuming Uppper case character
+          if(alphabet[ch-'a'] == false){
+              calculatePermute(restOfString,permute+ch, setOfPermute);
+           }
+           alphabet[ch-'a'] = true;
+        }
+        return "";
+    }
+}
